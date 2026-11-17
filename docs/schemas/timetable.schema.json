@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/timetable.schema.json",
+  "title": "Timetable",
+  "description": "One timetable per handbook (semester). The conceptual list of slots is stored as IDs of separate Slot records.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "handbookId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "slotIds": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "handbookId",
+    "slotIds"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "timetable-1",
+      "appDataId": "app-data-1",
+      "handbookId": "handbook-1",
+      "slotIds": [
+        "slot-1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/content-link.schema.json",
+  "title": "ContentLink",
+  "description": "A typed contextual link between core records, including attachments shared across tasks, modules and notes. Does not imply ownership or copy binary content.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "module",
+            "task",
+            "note",
+            "attachment"
+          ]
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "module",
+            "task",
+            "note",
+            "attachment"
+          ]
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/id"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "source",
+    "target"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "content-link-1",
+      "appDataId": "app-data-1",
+      "source": {
+        "type": "note",
+        "id": "note-1"
+      },
+      "target": {
+        "type": "attachment",
+        "id": "attachment-1"
+      }
+    }
+  ]
+}

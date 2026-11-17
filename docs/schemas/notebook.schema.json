@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/notebook.schema.json",
+  "title": "Notebook",
+  "description": "One notebook per module, scoped to that module's handbook, and one general notebook per dataset. moduleId null identifies the general notebook.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "moduleId": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "moduleId",
+    "name"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "notebook-1",
+      "appDataId": "app-data-1",
+      "moduleId": "module-1",
+      "name": "CS2030S notes"
+    }
+  ]
+}

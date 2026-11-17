@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/module.schema.json",
+  "title": "Module",
+  "description": "One course enrolment in one handbook (semester). Retaking a course creates a new ID. Module notebooks and their notes inherit this handbook context.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "handbookId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "code": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "colour": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "handbookId",
+    "code",
+    "name",
+    "colour"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "module-1",
+      "appDataId": "app-data-1",
+      "handbookId": "handbook-1",
+      "code": "CS2030S",
+      "name": "Programming Methodology II",
+      "colour": null
+    }
+  ]
+}

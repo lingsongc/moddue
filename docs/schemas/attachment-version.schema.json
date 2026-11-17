@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/attachment-version.schema.json",
+  "title": "AttachmentVersion",
+  "description": "Immutable file content version. contentRef is a platform-neutral managed-binary identity, not an absolute device path or Drive ID. Availability and upload progress are separate device state.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "attachmentId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "mimeType": {
+      "type": "string",
+      "pattern": "^[^\\s/]+/[^\\s/]+$"
+    },
+    "byteSize": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "contentHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ]
+    },
+    "contentRef": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "createdAt": {
+      "$ref": "common.schema.json#/$defs/instant"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "attachmentId",
+    "mimeType",
+    "byteSize",
+    "contentHash",
+    "contentRef",
+    "createdAt"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "attachment-version-1",
+      "appDataId": "app-data-1",
+      "attachmentId": "attachment-1",
+      "mimeType": "application/pdf",
+      "byteSize": 1024,
+      "contentHash": {
+        "algorithm": "sha256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "contentRef": "binary-1",
+      "createdAt": "2026-11-17T02:00:00Z"
+    }
+  ]
+}

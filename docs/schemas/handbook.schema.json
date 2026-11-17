@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/handbook.schema.json",
+  "title": "Handbook",
+  "description": "One semester of academic context. Modules, their notes and the timetable belong to this handbook; switching handbooks changes the view without moving stored records.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "academicYear": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "institution": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "programmeOrLevel": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "startDate": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "endDate": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "name",
+    "academicYear",
+    "institution",
+    "programmeOrLevel",
+    "startDate",
+    "endDate"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "handbook-1",
+      "appDataId": "app-data-1",
+      "name": "Semester 1",
+      "academicYear": "2026/27",
+      "institution": "NUS",
+      "programmeOrLevel": "Undergraduate",
+      "startDate": null,
+      "endDate": null
+    }
+  ]
+}

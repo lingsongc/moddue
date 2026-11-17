@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/app-data.schema.json",
+  "title": "AppData",
+  "description": "The complete collection of current canonical JSON records across handbooks. Child appDataId values refer to this id. Records occur once in typed collections and refer to one another by ID. Note bodies and attachment bytes are separate; sync/recovery history, credentials and device preferences are outside this format.",
+  "$comment": "Domain validation must check child appDataId equality, unique record IDs, references, ownership and per-handbook/module cardinalities. This is not an atomic Drive upload unit or a complete portable backup by itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "handbooks": {
+      "type": "array",
+      "items": {
+        "$ref": "handbook.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "$ref": "module.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "timetables": {
+      "type": "array",
+      "items": {
+        "$ref": "timetable.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "slots": {
+      "type": "array",
+      "items": {
+        "$ref": "slot.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "task.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "notebooks": {
+      "type": "array",
+      "items": {
+        "$ref": "notebook.schema.json"
+      },
+      "uniqueItems": true,
+      "contains": {
+        "type": "object",
+        "properties": {
+          "moduleId": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "moduleId"
+        ]
+      },
+      "minContains": 1,
+      "maxContains": 1,
+      "description": "All module notebooks plus exactly one general notebook (moduleId null)."
+    },
+    "noteFolders": {
+      "type": "array",
+      "items": {
+        "$ref": "note-folder.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "$ref": "note.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "noteDocuments": {
+      "type": "array",
+      "items": {
+        "$ref": "note-document.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "attachment.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "attachmentVersions": {
+      "type": "array",
+      "items": {
+        "$ref": "attachment-version.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "contentLinks": {
+      "type": "array",
+      "items": {
+        "$ref": "content-link.schema.json"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "handbooks",
+    "modules",
+    "timetables",
+    "slots",
+    "tasks",
+    "notebooks",
+    "noteFolders",
+    "notes",
+    "noteDocuments",
+    "attachments",
+    "attachmentVersions",
+    "contentLinks"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "app-data-1",
+      "handbooks": [
+        {
+          "schemaVersion": 1,
+          "id": "handbook-1",
+          "appDataId": "app-data-1",
+          "name": "Semester 1",
+          "academicYear": "2026/27",
+          "institution": "NUS",
+          "programmeOrLevel": "Undergraduate",
+          "startDate": null,
+          "endDate": null
+        }
+      ],
+      "modules": [
+        {
+          "schemaVersion": 1,
+          "id": "module-1",
+          "appDataId": "app-data-1",
+          "handbookId": "handbook-1",
+          "code": "CS2030S",
+          "name": "Programming Methodology II",
+          "colour": null
+        }
+      ],
+      "timetables": [
+        {
+          "schemaVersion": 1,
+          "id": "timetable-1",
+          "appDataId": "app-data-1",
+          "handbookId": "handbook-1",
+          "slotIds": [
+            "slot-1"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "schemaVersion": 1,
+          "id": "slot-1",
+          "appDataId": "app-data-1",
+          "moduleId": "module-1",
+          "weekday": "SAT",
+          "startTime": "10:00",
+          "endTime": "12:00",
+          "timezone": "Asia/Singapore",
+          "location": null,
+          "sessionType": "tutorial",
+          "classNumber": "1",
+          "weekPattern": {
+            "kind": "odd"
+          },
+          "dateExceptions": []
+        }
+      ],
+      "tasks": [
+        {
+          "schemaVersion": 1,
+          "id": "task-1",
+          "appDataId": "app-data-1",
+          "moduleId": null,
+          "title": "Submit financial aid form",
+          "category": "administrative",
+          "completed": false,
+          "deadline": null
+        }
+      ],
+      "notebooks": [
+        {
+          "schemaVersion": 1,
+          "id": "notebook-1",
+          "appDataId": "app-data-1",
+          "moduleId": "module-1",
+          "name": "CS2030S notes"
+        },
+        {
+          "schemaVersion": 1,
+          "id": "general-notebook-1",
+          "appDataId": "app-data-1",
+          "moduleId": null,
+          "name": "General notebook"
+        }
+      ],
+      "noteFolders": [
+        {
+          "schemaVersion": 1,
+          "id": "note-folder-1",
+          "appDataId": "app-data-1",
+          "notebookId": "notebook-1",
+          "parentFolderId": null,
+          "name": "Lectures"
+        }
+      ],
+      "notes": [
+        {
+          "schemaVersion": 1,
+          "id": "note-1",
+          "appDataId": "app-data-1",
+          "notebookId": "notebook-1",
+          "folderId": "note-folder-1",
+          "documentId": "note-document-1",
+          "title": "Lecture 1"
+        }
+      ],
+      "noteDocuments": [
+        {
+          "schemaVersion": 1,
+          "id": "note-document-1",
+          "appDataId": "app-data-1",
+          "contentRef": "note-content-1"
+        }
+      ],
+      "attachments": [
+        {
+          "schemaVersion": 1,
+          "id": "attachment-1",
+          "appDataId": "app-data-1",
+          "filename": "lecture-1.pdf"
+        }
+      ],
+      "attachmentVersions": [
+        {
+          "schemaVersion": 1,
+          "id": "attachment-version-1",
+          "appDataId": "app-data-1",
+          "attachmentId": "attachment-1",
+          "mimeType": "application/pdf",
+          "byteSize": 1024,
+          "contentHash": {
+            "algorithm": "sha256",
+            "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "contentRef": "binary-1",
+          "createdAt": "2026-11-17T02:00:00Z"
+        }
+      ],
+      "contentLinks": [
+        {
+          "schemaVersion": 1,
+          "id": "content-link-1",
+          "appDataId": "app-data-1",
+          "source": {
+            "type": "note",
+            "id": "note-1"
+          },
+          "target": {
+            "type": "attachment",
+            "id": "attachment-1"
+          }
+        }
+      ]
+    }
+  ]
+}

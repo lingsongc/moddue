@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/note.schema.json",
+  "title": "Note",
+  "description": "Authored-note metadata; its document body is a separate record. Null folderId places the note at the notebook root.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "notebookId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "folderId": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "documentId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "notebookId",
+    "folderId",
+    "documentId",
+    "title"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "note-1",
+      "appDataId": "app-data-1",
+      "notebookId": "notebook-1",
+      "folderId": "note-folder-1",
+      "documentId": "note-document-1",
+      "title": "Lecture 1"
+    }
+  ]
+}

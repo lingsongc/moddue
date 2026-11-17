@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/task.schema.json",
+  "title": "Task",
+  "description": "Completable work, optionally linked to a module. The deadline calendar is derived from these records.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "moduleId": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "examples": [
+        "assignment",
+        "tutorial",
+        "quiz",
+        "exam",
+        "administrative"
+      ],
+      "description": "Category vocabulary remains open; examples are not an exhaustive enum."
+    },
+    "completed": {
+      "type": "boolean"
+    },
+    "deadline": {
+      "anyOf": [
+        {
+          "$ref": "deadline.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "moduleId",
+    "title",
+    "category",
+    "completed",
+    "deadline"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "task-1",
+      "appDataId": "app-data-1",
+      "moduleId": null,
+      "title": "Submit financial aid form",
+      "category": "administrative",
+      "completed": false,
+      "deadline": null
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/slot.schema.json",
+  "title": "Slot",
+  "description": "A recurring class pattern belonging to a semester timetable, with explicit dated cancellations/overrides. Overrides may explicitly schedule a class during a break.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "moduleId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "weekday": {
+      "enum": [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI",
+        "SAT",
+        "SUN"
+      ]
+    },
+    "startTime": {
+      "$ref": "common.schema.json#/$defs/localTime"
+    },
+    "endTime": {
+      "$ref": "common.schema.json#/$defs/localTime"
+    },
+    "timezone": {
+      "$ref": "common.schema.json#/$defs/timezone"
+    },
+    "location": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sessionType": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "classNumber": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "weekPattern": {
+      "anyOf": [
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "all",
+                    "odd",
+                    "even"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "selected"
+                },
+                "weeks": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "kind",
+                "weeks"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dateExceptions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "$ref": "common.schema.json#/$defs/date"
+              },
+              "kind": {
+                "const": "cancelled"
+              }
+            },
+            "required": [
+              "date",
+              "kind"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "$ref": "common.schema.json#/$defs/date"
+              },
+              "kind": {
+                "const": "override"
+              },
+              "startTime": {
+                "$ref": "common.schema.json#/$defs/localTime"
+              },
+              "endTime": {
+                "$ref": "common.schema.json#/$defs/localTime"
+              },
+              "location": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "kind"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "startTime"
+                ]
+              },
+              {
+                "required": [
+                  "location"
+                ]
+              }
+            ],
+            "dependentRequired": {
+              "startTime": [
+                "endTime"
+              ],
+              "endTime": [
+                "startTime"
+              ]
+            }
+          }
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "moduleId",
+    "weekday",
+    "startTime",
+    "endTime",
+    "timezone",
+    "location",
+    "sessionType",
+    "classNumber",
+    "weekPattern",
+    "dateExceptions"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "slot-1",
+      "appDataId": "app-data-1",
+      "moduleId": "module-1",
+      "weekday": "SAT",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "timezone": "Asia/Singapore",
+      "location": null,
+      "sessionType": "tutorial",
+      "classNumber": "1",
+      "weekPattern": {
+        "kind": "odd"
+      },
+      "dateExceptions": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/note-document.schema.json",
+  "title": "NoteDocument",
+  "description": "Descriptor of a mergeable note body. contentRef identifies separately persisted editor/CRDT state, not a second plain-text copy or a Drive URL. Body encoding/update/history schemas await editor selection.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "contentRef": {
+      "$ref": "common.schema.json#/$defs/id"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "contentRef"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "note-document-1",
+      "appDataId": "app-data-1",
+      "contentRef": "note-content-1"
+    }
+  ]
+}

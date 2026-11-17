@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/note-folder.schema.json",
+  "title": "NoteFolder",
+  "description": "A folder within one notebook. Parents must be in that notebook; cycles are invalid.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "notebookId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "parentFolderId": {
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "notebookId",
+    "parentFolderId",
+    "name"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "note-folder-1",
+      "appDataId": "app-data-1",
+      "notebookId": "notebook-1",
+      "parentFolderId": null,
+      "name": "Lectures"
+    }
+  ]
+}

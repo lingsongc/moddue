@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modulo.example/schemas/v1/attachment.schema.json",
+  "title": "Attachment",
+  "description": "Logical file identity. Versions reference this record; links reuse it without copying bytes. A valid attachment has at least one local version.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "appDataId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "filename": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "appDataId",
+    "filename"
+  ],
+  "examples": [
+    {
+      "schemaVersion": 1,
+      "id": "attachment-1",
+      "appDataId": "app-data-1",
+      "filename": "lecture-1.pdf"
+    }
+  ]
+}
