@@ -1,4 +1,4 @@
-# Modulo
+# Moddue
 
 Minimal React + TypeScript application using Vite. The initial page is intentionally blank.
 
