@@ -1,0 +1,22 @@
+:root {
+  --font-body: 'Google Sans Variable', sans-serif;
+  --font-heading: 'Urbanist Variable', sans-serif;
+  font-family: var(--font-body);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
