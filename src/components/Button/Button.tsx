@@ -36,7 +36,7 @@ export function Button({
     '--button-padding': dimension(padding),
     '--button-icon-size': dimension(iconSize),
     '--button-font-size': dimension(fontSize),
-    width: variant === 'icon' ? dimension(height ?? 40) : dimension(width),
+    width: variant === 'icon' ? dimension(height) : dimension(width),
     ...style,
   } as CSSProperties;
 

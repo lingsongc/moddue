@@ -1,9 +1,10 @@
+/* Button treatments, dimensions and interaction states. */
 .button {
+  --button-height: var(--control-button-height, 40px);
+  --button-radius: calc(var(--button-height) * 3 / 8);
   --button-color: var(--primary, #4f46e5);
   --button-on-color: #fff;
-  --button-height: 40px;
   --button-padding: 20px;
-  --button-radius: calc(var(--button-height) * 3 / 8);
   --button-icon-size: 16px;
   --button-font-size: 14px;
   --button-gap: 8px;
@@ -16,8 +17,8 @@
   min-inline-size: 0;
   max-inline-size: 100%;
   min-block-size: var(--button-height);
-  padding: max(0px, calc((var(--button-height) - var(--button-font-size) * 1.5 - 2px) / 2)) var(--button-padding);
-  border: 1px solid transparent;
+  padding: max(0px, calc((var(--button-height) - var(--button-font-size) * 1.5 - 4px) / 2)) var(--button-padding);
+  border: 2px solid transparent;
   border-radius: var(--button-radius);
   background: var(--button-color);
   color: var(--button-on-color);
@@ -33,7 +34,7 @@
 .button::after {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: inherit;
   pointer-events: none;
 }
