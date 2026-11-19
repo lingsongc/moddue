@@ -6,6 +6,6 @@ type IconProps = TablerIconProps & {
 };
 
 /** Renders a Tabler icon with the agreed Moddue size and stroke. */
-export function Icon({ icon: Component, size = 16, stroke = 1.8, ...props }: IconProps) {
+export function Icon({ icon: Component, size = 16, stroke = 2, ...props }: IconProps) {
   return <Component size={size} stroke={stroke} {...props} />;
 }

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import '@fontsource-variable/google-sans';
+import '@fontsource-variable/google-sans/full.css';
 import '@fontsource-variable/urbanist';
 import './fonts.css';
 
