@@ -1,0 +1,70 @@
+.button {
+  --button-color: var(--primary, #4f46e5);
+  --button-on-color: #fff;
+  --button-height: 40px;
+  --button-padding: 20px;
+  --button-radius: calc(var(--button-height) * 3 / 8);
+  --button-icon-size: 16px;
+  --button-font-size: 14px;
+  --button-gap: 8px;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: var(--button-height);
+  padding: max(0px, calc((var(--button-height) - var(--button-font-size) * 1.5 - 2px) / 2)) var(--button-padding);
+  border: 1px solid transparent;
+  border-radius: var(--button-radius);
+  background: var(--button-color);
+  color: var(--button-on-color);
+  font-family: var(--font-body, sans-serif);
+  font-size: var(--button-font-size);
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+.button::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.button[data-hovered]::after { background: currentColor; opacity: .08; }
+.button[data-pressed]::after { background: currentColor; opacity: .14; }
+.button[data-focus-visible] { outline: 2px solid var(--button-color); outline-offset: 3px; }
+.button[data-variant='secondary'] { background: color-mix(in srgb, var(--button-color) 10%, var(--surface, white)); color: var(--button-color); }
+.button[data-variant='text'] { background: transparent; color: var(--button-color); }
+.button[data-variant='outline'] { background: transparent; color: var(--button-color); border-color: var(--button-color); }
+.button[data-variant='icon'] {
+  inline-size: var(--button-height);
+  block-size: var(--button-height);
+  min-block-size: var(--button-height);
+  flex-shrink: 0;
+  padding: 0;
+  border-radius: 50%;
+}
+.button[data-disabled] { opacity: .38; cursor: not-allowed; }
+.label { flex: 0 1 auto; min-inline-size: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slot {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  inline-size: calc(var(--button-icon-size) + var(--button-gap));
+  flex: 1 0 auto;
+}
+.slot:first-child { justify-content: flex-start; }
+.slot:last-child { justify-content: flex-end; }
+.slot:first-child:not(.emptySlot) { padding-inline-end: var(--button-gap); }
+.slot:last-child:not(.emptySlot) { padding-inline-start: var(--button-gap); }
+/* Equal slots centre the label. Under constraint, the empty slot yields first. */
+.emptySlot { flex-shrink: 100000; }
+.icon { display: inline-flex; flex: none; inline-size: var(--button-icon-size); block-size: var(--button-icon-size); }
+.icon svg { inline-size: 100%; block-size: 100%; }
