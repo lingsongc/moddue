@@ -1,0 +1,35 @@
+/* Shared segmented tab states with content-driven overflow and expanded touch targets. */
+.tabs { min-width: 0; color: var(--text, #0e141f); font: 16px/1.4 var(--font-body, 'Google Sans', sans-serif); }
+.listViewport { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
+.list { box-sizing: border-box; display: flex; width: max-content; min-width: 0; gap: 4px; padding: 4px; border-radius: 12px; background: var(--background, #f8fafc); }
+.tab {
+  --tab-height: 40px;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--tab-height);
+  min-width: 48px;
+  margin-block: 4px;
+  padding: 4px 16px;
+  border: 2px solid transparent;
+  border-radius: calc(var(--tab-height) * 3 / 8);
+  color: var(--secondary, #475569);
+  cursor: pointer;
+  outline: none;
+  line-height: 24px;
+}
+/* The relative tab contains a transparent hit area; margins reserve its 48px vertical space. */
+.tab::before { position: absolute; inset-block: -6px; inset-inline: -2px; border-radius: inherit; background: transparent; content: ''; pointer-events: auto; }
+.tab[data-hovered] { background: var(--tonal, #eef2ff); }
+.tab[data-selected], .tab[data-selected][data-hovered] { background: var(--primary, #4f46e5); color: #fff; font-weight: 600; }
+.tab[data-focus-visible] { outline: 2px solid var(--focus, #4f46e5); outline-offset: -2px; }
+.tab[data-selected][data-focus-visible] { outline-color: #fff; box-shadow: inset 0 0 0 2px var(--primary, #4f46e5); }
+.tab[data-disabled] { opacity: .45; cursor: not-allowed; }
+.count { font-variant-numeric: tabular-nums; }
+.panel { padding-block: 16px; outline: none; }
+.panel[data-focus-visible] { outline: 2px solid var(--focus, #4f46e5); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .listViewport { scroll-behavior: auto; } }
