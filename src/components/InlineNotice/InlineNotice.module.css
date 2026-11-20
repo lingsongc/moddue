@@ -1,0 +1,30 @@
+/* Plain inline notice layout; tone only changes the message color. */
+.notice {
+  display: grid;
+  min-inline-size: 0;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 12px;
+  color: var(--notice-color, var(--text, #0e141f));
+  font-family: var(--font-body, 'Google Sans', sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.notice[data-tone='neutral'] { --notice-color: var(--secondary, #475569); }
+.notice[data-tone='info'] { --notice-color: var(--info, #175cd3); }
+.notice[data-tone='success'] { --notice-color: var(--success, #0f766e); }
+.notice[data-tone='warning'] { --notice-color: var(--warning, #b54708); }
+.notice[data-tone='error'] { --notice-color: var(--error, #b42318); }
+
+.icon { display: inline-flex; inline-size: 20px; block-size: 24px; align-items: center; justify-content: center; }
+.icon :where(svg) { inline-size: 20px; block-size: 20px; flex: none; }
+.content { min-inline-size: 0; overflow-wrap: anywhere; color: var(--text, #0e141f); }
+.title { margin-block-end: 4px; font-weight: 600; }
+.body { min-inline-size: 0; }
+.action { display: flex; flex-wrap: wrap; gap: 8px; padding-block-start: 8px; }
+.action > * { max-inline-size: 100%; }
+
+@media (max-width: 360px) {
+  .notice { grid-template-columns: 20px minmax(0, 1fr); column-gap: 8px; }
+}
