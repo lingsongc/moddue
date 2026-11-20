@@ -1,0 +1,79 @@
+/* Radio option geometry stays touch-sized in both stacked and wrapped horizontal layouts. */
+.group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 6px;
+  color: var(--text);
+  font-family: var(--font-body, sans-serif);
+  font-size: var(--field-font-size, 16px);
+}
+
+.label {
+  align-self: flex-start;
+  margin: 0;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 16px;
+  font-variation-settings: 'GRAD' 100;
+  text-transform: capitalize;
+  cursor: default;
+}
+
+.options { display: flex; flex-direction: column; gap: 4px; }
+.group[data-orientation='horizontal'] .options { flex-direction: row; flex-wrap: wrap; align-items: center; }
+
+.radio {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  gap: 8px;
+  color: var(--text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.target {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.indicator {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--control-border);
+  border-radius: 9px;
+  background: var(--surface);
+}
+
+.selectedMark {
+  width: 10px;
+  height: 10px;
+  border-radius: 3.75px;
+  background: var(--accent);
+  transform: scale(0);
+}
+
+.radio[data-selected] .indicator { border-color: var(--accent); }
+.radio[data-selected] .selectedMark { transform: scale(1); }
+.radio[data-hovered]:not([data-disabled]) .indicator { border-color: var(--accent); background: var(--tonal); }
+.radio[data-focus-visible] .indicator { outline: 2px solid var(--focus); outline-offset: 2px; }
+.radio[data-disabled] { color: var(--secondary); cursor: not-allowed; opacity: .45; }
+.radio[data-disabled] .indicator { background: var(--background); }
+.optionLabel { min-width: 0; line-height: 1.4; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .selectedMark { transition: transform 120ms ease; }
+}

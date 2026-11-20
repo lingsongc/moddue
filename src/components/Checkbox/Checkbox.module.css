@@ -1,0 +1,74 @@
+/* Shared checkbox target and indicator states. */
+.checkbox {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  gap: 8px;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.target {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.indicator {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--control-border);
+  border-radius: 9px;
+  background: var(--surface);
+  color: #fff;
+}
+
+.checkmark {
+  display: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+}
+
+.mixedMark {
+  display: none;
+  width: 10px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.checkbox[data-selected] .indicator,
+.checkbox[data-indeterminate] .indicator {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.checkbox[data-selected] .checkmark { display: block; }
+.checkbox[data-indeterminate] .checkmark { display: none; }
+.checkbox[data-indeterminate] .mixedMark { display: block; }
+.checkbox[data-hovered]:not([data-disabled]):not([data-selected]):not([data-indeterminate]) .indicator { border-color: var(--accent); }
+.checkbox[data-pressed]:not([data-disabled]) .indicator { background: var(--tonal); color: var(--primary); }
+.checkbox[data-selected][data-pressed]:not([data-disabled]) .indicator,
+.checkbox[data-indeterminate][data-pressed]:not([data-disabled]) .indicator { background: var(--accent); color: var(--surface); }
+.checkbox[data-focus-visible] .indicator { outline: 2px solid var(--focus); outline-offset: 2px; }
+.checkbox[data-disabled] { color: var(--secondary); cursor: not-allowed; opacity: .45; }
+.checkbox[data-disabled]:not([data-selected]):not([data-indeterminate]) .indicator { background: var(--background); }
+
+.label { min-width: 0; line-height: 1.4; }

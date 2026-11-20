@@ -1,0 +1,37 @@
+/* Shared action-menu trigger and popup geometry. */
+.trigger { width: 40px !important; height: 40px !important; min-height: 40px !important; margin: 4px; padding: 0 !important; }
+.triggerIcon { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; }
+.trigger::before { position: absolute; inset: -6px; border-radius: inherit; content: ''; pointer-events: auto; }
+.popover {
+  box-sizing: border-box;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 8px;
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 16px;
+  background: var(--surface, #fff);
+  color: var(--text, #0e141f);
+  font: 16px/1.4 var(--font-body, 'Google Sans', sans-serif);
+  box-shadow: 0 8px 28px rgb(14 20 31 / 16%);
+  outline: none;
+}
+.menu { display: flex; flex-direction: column; gap: 2px; max-height: min(60dvh, 400px); overflow: auto; outline: none; }
+.item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  overflow-wrap: anywhere;
+}
+.item[data-hovered], .item[data-focused] { background: var(--tonal, #eef2ff); }
+.item[data-focus-visible] { outline: 2px solid var(--focus, #4f46e5); outline-offset: -2px; }
+.item[data-disabled] { opacity: .45; cursor: not-allowed; }
+.item[data-destructive] { color: var(--error, #b42318); }
+.icon { display: inline-flex; flex: none; width: 20px; height: 20px; }
+.icon > svg { width: 100%; height: 100%; }
+.label { min-width: 0; }

@@ -1,0 +1,49 @@
+/* Shared spinner and progress indicator motion and geometry. */
+.spinner {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--spinner-size, 16px);
+  block-size: var(--spinner-size, 16px);
+  transform-origin: center;
+  vertical-align: middle;
+  animation: spin 1s linear infinite;
+}
+
+.spinnerTrack, .spinnerArc { stroke: currentColor; stroke-width: 2px; vector-effect: non-scaling-stroke; }
+.spinnerTrack { opacity: .22; }
+.spinnerArc { stroke-dasharray: 23 15; stroke-linecap: round; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.progress {
+  display: grid;
+  min-inline-size: 0;
+  gap: 8px;
+  color: var(--text, #0e141f);
+  font-family: var(--font-body, 'Google Sans', sans-serif);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.progressLabel { min-inline-size: 0; overflow-wrap: anywhere; }
+.progressTrack { block-size: 8px; overflow: hidden; border-radius: 4px; background: var(--tonal, #eef2ff); }
+.progressFill {
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--primary, #4f46e5);
+  transition: inline-size 120ms linear;
+}
+.progressFill[data-indeterminate] {
+  inline-size: 35%;
+  animation: progress 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes progress {
+  from { transform: translateX(-25%); }
+  to { transform: translateX(185%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner, .progressFill[data-indeterminate] { animation: none; }
+  .progressFill { transition: none; }
+}

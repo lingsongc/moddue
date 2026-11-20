@@ -1,0 +1,28 @@
+/* Shared status badge sizing, tone surfaces and readable foregrounds. */
+.badge {
+  box-sizing: border-box;
+  display: inline-flex;
+  max-inline-size: 100%;
+  align-items: center;
+  gap: 6px;
+  min-block-size: 32px;
+  padding: 6px 10px 6px 6px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--status-bg, var(--background, #f8fafc));
+  color: var(--status-color, var(--secondary, #475569));
+  font-family: var(--font-body, 'Google Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.badge[data-tone='neutral'] { --status-color: var(--text, #0e141f); --status-bg: var(--border, #e2e8f0); }
+.badge[data-tone='info'] { --status-color: var(--info, #175cd3); --status-bg: var(--info-bg, #eff8ff); }
+.badge[data-tone='success'] { --status-color: var(--success, #0f766e); --status-bg: var(--success-bg, #d1fae5); }
+.badge[data-tone='warning'] { --status-color: var(--warning, #b54708); --status-bg: var(--warning-bg, #fef0c7); }
+.badge[data-tone='error'] { --status-color: var(--error, #b42318); --status-bg: var(--error-bg, #fee4e2); }
+
+.icon { display: inline-flex; flex: none; inline-size: 16px; block-size: 16px; }
+.icon :where(svg) { inline-size: 100%; block-size: 100%; }
+.label { min-inline-size: 0; overflow-wrap: anywhere; }
